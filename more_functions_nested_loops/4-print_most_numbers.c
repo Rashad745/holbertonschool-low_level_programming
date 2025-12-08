@@ -1,0 +1,22 @@
+#include "main.h"
+
+/**
+ * print_most_numbers - prints numbers 0-9 except 2 and 4
+ *
+ * You can only use _putchar twice in the source code:
+ *  - once for printing numbers
+ *  - once for the newline
+ */
+void print_most_numbers(void)
+{
+    char c;
+
+    for (c = '0'; c <= '9'; c++)
+    {
+        if (c == '2' || c == '4')
+            continue;
+        _putchar(c);   /* 1st _putchar in source */
+    }
+
+    _putchar('\n');    /* 2nd _putchar in source */
+}
