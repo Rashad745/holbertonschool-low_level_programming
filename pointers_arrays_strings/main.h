@@ -1,24 +1,15 @@
-#include "main.h"
+#ifndef MAIN_H
+#define MAIN_H
 
-/**
- * puts2 - prints every other character of a string,
- * starting with the first character, followed by a new line
- * @str: pointer to the string
- */
-void puts2(char *str)
-{
-	int i = 0;
+/* Function prototypes */
+void reset_to_98(int *n);
+void swap_int(int *a, int *b);
+int _strlen(char *s);
+void _puts(char *str);
+int _putchar(char c);
+void print_rev(char *s);
+void rev_string(char *s);
+void puts2(char *str);
 
-	if (!str)
-		return;
-
-	while (str[i] != '\0')
-	{
-		_putchar(str[i]);
-		i += 2;
-	}
-
-	_putchar('\n');
-}
-
+#endif /* MAIN_H */
 
