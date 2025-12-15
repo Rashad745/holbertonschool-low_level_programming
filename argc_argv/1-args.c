@@ -8,9 +8,7 @@
  * Return: 0 on success
  */
 int main(int argc, char *argv[])
-{
- (void)argv; /* argv is unused */
+{(void)argv; /* argv is unused */
  printf("%d\n", argc - 1);
- return (0);
-}
+ return (0);}
 
