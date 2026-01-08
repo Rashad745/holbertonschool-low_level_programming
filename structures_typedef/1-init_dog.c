@@ -1,5 +1,4 @@
 #include "dog.h"
-#include <stdlib.h> /* for NULL */
 
 /**
  * init_dog - initializes a variable of type struct dog
@@ -9,7 +8,7 @@
  * @owner: owner of the dog
  *
  * Description: This function sets the name, age, and owner
- * of the struct dog pointed to by d.
+ * of the struct dog pointed to by d. Does nothing if d is NULL.
  */
 void init_dog(struct dog *d, char *name, float age, char *owner)
 {
