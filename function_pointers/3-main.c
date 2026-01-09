@@ -1,7 +1,11 @@
 #include "3-calc.h"
 
 /**
- * main - performs simple operations
+ * main - performs simple arithmetic operations
+ * @argc: number of arguments
+ * @argv: array of arguments
+ *
+ * Return: 0 on success, exits with error code otherwise
  */
 int main(int argc, char *argv[])
 {
@@ -35,3 +39,4 @@ int main(int argc, char *argv[])
 
 	return (0);
 }
+
