@@ -1,29 +1,25 @@
-#ifndef DOG_H
-#define DOG_H
-
-#include <stdlib.h> /* for NULL */
+#include <stdio.h>
+#include "dog.h"
 
 /**
- * struct dog - defines a dog
- * @name: name of the dog
- * @age: age of the dog
- * @owner: owner of the dog
- *
- * Description: Stores information about a dog.
+ * print_dog - prints a struct dog
+ * @d: pointer to struct dog
  */
-struct dog
+void print_dog(struct dog *d)
 {
-	char *name;
-	float age;
-	char *owner;
-};
+	if (d == NULL)
+		return;
 
-/* Typedef for convenience */
-typedef struct dog dog_t;
+	if (d->name == NULL)
+		printf("Name: (nil)\n");
+	else
+		printf("Name: %s\n", d->name);
 
-/* Function prototypes */
-void init_dog(struct dog *d, char *name, float age, char *owner);
-void print_dog(struct dog *d);
+	printf("Age: %f\n", d->age);
 
-#endif /* DOG_H */
+	if (d->owner == NULL)
+		printf("Owner: (nil)\n");
+	else
+		printf("Owner: %s\n", d->owner);
+}
 
