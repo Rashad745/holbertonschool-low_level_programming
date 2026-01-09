@@ -6,10 +6,8 @@
  * Return: Always 0.
  */
 int main(void)
+void print_name(char *name, void (*f)(char *))
 {
-	print_name("Bob", print_name_as_is);
-	print_name("Bob Dylan", print_name_uppercase);
-	print_name("Hodor", NULL); /* should safely do nothing */
-
-	return (0);
+	if (name != NULL && f != NULL)
+		f(name);
 }
