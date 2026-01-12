@@ -24,45 +24,40 @@ void print_all(const char * const format, ...)
 
 	while (format && format[i])
 	{
-		j = 0;
-		while (j < 4)
-		{
-			if (format[i] == types[j])
-			{
-				printf("%s", sep);
-				funcs[j](args);
-				sep = ", ";
-			}
-			j++;
-		}
-		i++;
-	}
-
-	va_end(args);
-	printf("\n");
+j = 0;
+while (j < 4)
+{
+if (format[i] == types[j])
+{
+printf("%s", sep);
+funcs[j](args);
+sep = ", ";
 }
-
+j++;
+}
+i++;
+}
+va_end(args);
+printf("\n");
+}
 /* Helper functions definitions */
 void print_char(va_list args)
 {
-	printf("%c", va_arg(args, int));
+printf("%c", va_arg(args, int));
 }
-
 void print_int(va_list args)
 {
-	printf("%d", va_arg(args, int));
+printf("%d", va_arg(args, int));
 }
-
 void print_float(va_list args)
 {
-	printf("%f", va_arg(args, double));
+printf("%f", va_arg(args, double));
 }
-
 void print_string(va_list args)
 {
-	char *s = va_arg(args, char *);
-	if (!s)
-		s = "(nil)";
-	printf("%s", s);
+char *s = va_arg(args, char *);
+if (!s)
+s = "(nil)";
+printf("%s", s);
 }
 
