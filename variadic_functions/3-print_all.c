@@ -1,70 +1,61 @@
 #include "variadic_functions.h"
 
-typedef void (*printer)(va_list args);
+/**
+ * print_all - prints anything based on format
+ * @format: list of types of arguments
+ */
+void print_all(const char * const format, ...)
+{
+	va_list args;
+	unsigned int i = 0, j;
+	char *str;
+	const char *sep = "";
+	const char types[] = {'c', 'i', 'f', 's'};
+	void (*funcs[])(va_list) = {print_char, print_int, print_float, print_string};
 
+	va_start(args, format);
+
+	while (format && format[i])
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (format[i] == types[j])
+			{
+				printf("%s", sep);
+				funcs[j](args);
+				sep = ", ";
+			}
+			j++;
+		}
+		i++;
+	}
+
+	va_end(args);
+	printf("\n");
+}
+
+/* helper functions */
 void print_char(va_list args)
 {
-    printf("%c", va_arg(args, int));
+	printf("%c", va_arg(args, int));
 }
 
 void print_int(va_list args)
 {
-    printf("%d", va_arg(args, int));
+	printf("%d", va_arg(args, int));
 }
 
 void print_float(va_list args)
 {
-    printf("%f", va_arg(args, double));
+	printf("%f", va_arg(args, double));
 }
 
 void print_string(va_list args)
 {
-    char *s = va_arg(args, char *);
-    if (s == NULL)
-        s = "(nil)";
-    printf("%s", s);
-}
-
-/**
- * print_all - prints anything
- */
-void print_all(const char * const format, ...)
-{
-    va_list args;
-    unsigned int i = 0;
-    char *sep = "";
-    typedef struct {
-        char symbol;
-        printer f;
-    } mapping;
-
-    mapping map[] = {
-        {'c', print_char},
-        {'i', print_int},
-        {'f', print_float},
-        {'s', print_string},
-        {0, NULL}
-    };
-
-    va_start(args, format);
-
-    while (format && format[i])
-    {
-        unsigned int j = 0;
-        while (map[j].symbol)
-        {
-            if (map[j].symbol == format[i])
-            {
-                printf("%s", sep);
-                map[j].f(args);
-                sep = ", ";
-            }
-            j++;
-        }
-        i++;
-    }
-
-    va_end(args);
-    printf("\n");
+	char *s = va_arg(args, char *);
+	if (s == NULL)
+		s = "(nil)";
+	printf("%s", s);
 }
 
