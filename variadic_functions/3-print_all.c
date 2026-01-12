@@ -1,4 +1,12 @@
 #include "variadic_functions.h"
+#include <stdio.h>
+#include <stdarg.h>
+
+/* Helper function prototypes */
+void print_char(va_list args);
+void print_int(va_list args);
+void print_float(va_list args);
+void print_string(va_list args);
 
 /**
  * print_all - prints anything based on format
@@ -8,7 +16,6 @@ void print_all(const char * const format, ...)
 {
 	va_list args;
 	unsigned int i = 0, j;
-	char *str;
 	const char *sep = "";
 	const char types[] = {'c', 'i', 'f', 's'};
 	void (*funcs[])(va_list) = {print_char, print_int, print_float, print_string};
@@ -35,7 +42,7 @@ void print_all(const char * const format, ...)
 	printf("\n");
 }
 
-/* helper functions */
+/* Helper functions definitions */
 void print_char(va_list args)
 {
 	printf("%c", va_arg(args, int));
@@ -54,7 +61,7 @@ void print_float(va_list args)
 void print_string(va_list args)
 {
 	char *s = va_arg(args, char *);
-	if (s == NULL)
+	if (!s)
 		s = "(nil)";
 	printf("%s", s);
 }
