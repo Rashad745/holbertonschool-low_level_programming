@@ -3,17 +3,20 @@
 
 /**
  * free_list - frees a list_t list
- * @head: pointer to the first node
+ * @head: pointer to the first node of the list
+ *
+ * Description: Frees all nodes and their strings.
  */
 void free_list(list_t *head)
 {
-    list_t *temp;
+	list_t *tmp;
 
-    while (head)
-    {
-        temp = head->next;
-        free(head->str); /* free the duplicated string */
-        free(head);      /* free the node itself */
-        head = temp;
-    }
+	while (head)
+	{
+		tmp = head->next;
+		free(head->str);
+		free(head);
+		head = tmp;
+	}
 }
+
