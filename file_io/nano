@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+/* Helper to open source file */
+int open_from(const char *filename)
+{
+    int fd = open(filename, O_RDONLY);
+    if (fd == -1)
+    {
+        dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
+        exit(98);
+    }
+    return fd;
+}
+
+/* Helper to open/create destination file */
+int open_to(const char *filename)
+{
+    int fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+    if (fd == -1)
+    {
+        dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
+        exit(99);
+    }
+    return fd;
+}
+
+/* Copy 1024-byte chunks from fd_from to fd_to */
+void copy_file(int fd_from, int fd_to)
+{
+    char buffer[1024];
+    ssize_t r, w;
+
+    while ((r = read(fd_from, buffer, 1024)) > 0)
+    {
+        w = write(fd_to, buffer, r);
+        if (w != r)
+        {
+            dprintf(STDERR_FILENO, "Error: Can't write to file\n");
+            exit(99);
+        }
+    }
+
+    if (r == -1)
+    {
+        dprintf(STDERR_FILENO, "Error: Can't read from file\n");
+        exit(98);
+    }
+}
+
+/* Safe close function */
+void safe_close(int fd)
+{
+    if (close(fd) == -1)
+    {
+        dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+        exit(100);
+    }
+}
+
+/* Main function */
+int main(int argc, char *argv[])
+{
+    int fd_from, fd_to;
+
+    if (argc != 3)
+    {
+        dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+        exit(97);
+    }
+
+    fd_from = open_from(argv[1]);
+    fd_to = open_to(argv[2]);
+    copy_file(fd_from, fd_to);
+    safe_close(fd_from);
+    safe_close(fd_to);
+
+    return 0;
+}
