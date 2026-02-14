@@ -64,9 +64,8 @@ int main(int ac, char **av)
 
 	if (close(fd_from) == -1)
 		error_exit(100, "Error: Can't close fd", av[1]);
-	if (close(fd_to) == -1)
-		error_exit(100, "Error: Can't close fd", av[2]);
-
+if (close(fd_to) == -1)
+error_exit(100, "Error: Can't close fd", av[2]);
 	return (0);
 }
 
