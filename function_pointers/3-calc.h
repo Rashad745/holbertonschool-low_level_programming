@@ -4,7 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Struct for operator and function pointer */
+/* 
+ * struct op - Struct to map an operator symbol to its function
+ * @op: The operator as a string ("+", "-", "*", "/", "%")
+ * @f: Function pointer to the corresponding operation function
+ */
 typedef struct op
 {
 	char *op;
