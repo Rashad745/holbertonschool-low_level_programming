@@ -2,12 +2,6 @@
 #include <stdio.h>
 #include "variadic_functions.h"
 
-/* Helper function prototypes */
-void print_char(va_list args);
-void print_int(va_list args);
-void print_float(va_list args);
-void print_string(va_list args);
-
 /**
  * print_char - prints a char from va_list
  * @args: va_list containing the char
@@ -68,13 +62,6 @@ void print_all(const char * const format, ...)
 	int i = 0;
 	char *separator = "";
 
-	/* Array of type symbols and function pointers */
-	typedef struct op
-	{
-		char *symbol;
-		void (*f)(va_list);
-	} op_t;
-
 	op_t ops[] = {
 		{"c", print_char},
 		{"i", print_int},
@@ -102,6 +89,7 @@ void print_all(const char * const format, ...)
 		}
 		i++;
 	}
+
 	va_end(args);
 	printf("\n");
 }
